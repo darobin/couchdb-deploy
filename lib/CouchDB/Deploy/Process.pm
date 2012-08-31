@@ -25,7 +25,6 @@ sub createDBUnlessExists {
     my $self = shift;
     my $dbName = shift;
     
-    $dbName .= '/' unless $dbName =~ m{/$};
     if (not $self->{client}->dbExists($dbName)) {
         $self->{db} = $self->{client}->newDB($dbName)->create();
         return 1;
@@ -36,7 +35,6 @@ sub createDBUnlessExists {
     }
 }
 
-use Data::Dumper;
 sub addDocumentUnlessExistsOrSame {
     my $self = shift;
     my $id = shift;
@@ -107,7 +105,8 @@ sub addDesignDocUnlessExistsOrSame {
     else {
         my $dd = $db->newDesignDoc($id)->retrieve();
         if (not _SAME($dd->data, $data)) {
-            $dd->data($data)->update();
+            $dd->data($data);
+            $dd->update();
             return 2;
         }
         return 0;
