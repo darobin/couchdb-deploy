@@ -93,7 +93,7 @@ CouchDB::Deploy - Simple configuration scripting to deploy CouchDB databases
 
     use CouchDB::Deploy;
 
-    db 'my-test-db/', containing {
+    db 'my-test-db', containing {
         doc {
             _id     => 'foo',
             key     => 'value',
@@ -172,8 +172,7 @@ be updated to also support a Config::Any approach.
 
 =item db $DATABASE, containing { CONTENT }
 
-Creates a database with the given name, and adds the content, unless it exists. Keep in mind
-that CouchDB databases must have a trailing slash in their names.
+Creates a database with the given name, and adds the content, unless it exists.
 
 =item doc { CONTENT }
 
